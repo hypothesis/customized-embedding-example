@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Customize Hypothes.is Embedding</title>
+</head>
+<body>
+  <h1>Customized embedding<a class="headerlink" href="#customized-embedding" title="Permalink to this headline">¶</a></h1>
+  <p>To customize the application, define a function <code class="docutils literal"><span class="pre">window.hypothesisConfig</span></code>
+  which returns an options object.</p>
+  <p>The <code class="docutils literal"><span class="pre">constructor</span></code> property should be used to select an annotation
+  application. Four are provided: <code class="docutils literal"><span class="pre">Annotator.Guest</span></code>, <code class="docutils literal"><span class="pre">Annotator.Host</span></code>,
+  <code class="docutils literal"><span class="pre">Annotator.Sidebar</span></code> and <code class="docutils literal"><span class="pre">Annotator.PdfSidebar</span></code>.</p>
+  <p><code class="docutils literal"><span class="pre">Annotator.Guest</span></code> expects to connect to an annotator widget running in a
+  different frame. Any number of instances can communicate with a single widget
+  in order to provide annotation of many frames.</p>
+  <p><code class="docutils literal"><span class="pre">Annotator.Host</span></code> is an extended version of <code class="docutils literal"><span class="pre">Annotator.Guest</span></code> that will
+  instantiate an annotator widget by loading the location given by the <code class="docutils literal"><span class="pre">app</span></code>
+  option in an iframe and appending it to the document.</p>
+  <p><code class="docutils literal"><span class="pre">Annotator.Sidebar</span></code> is an extended <code class="docutils literal"><span class="pre">Annotator.Host</span></code> that puts the widget
+  in a sidebar interface. It loads additional plugins that show a bar of bucket
+  indicators, each providing the ability to select a cluster of highlights, and a
+  toolbar that can be used to resize the widget and control other aspects of the
+  user interface.</p>
+  <p><code class="docutils literal"><span class="pre">Annotator.PdfSidebar</span></code> is a custom version of <code class="docutils literal"><span class="pre">Annotator.Sidebar</span></code> with
+  defaults tailored for use in a PDF.js viewer.</p>
+  <p>The following is roughly the default configuration:</p>
+  <div class="highlight-python"><div class="highlight"><pre>window.hypothesisConfig = function () {
+    return {
+      constructor: Annotator.Sidebar,
+      app: 'https://hypothes.is/app.html'
+    };
+  };
+  </pre></div></div>
+
+  <div id="put-hypothesis-here"></div>
+
+  <script src="embed.js"></script>
+</body>
+</html>
