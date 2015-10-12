@@ -61,13 +61,27 @@ window.hypothesisInstall = function (inject) {
 
   window.hypothesisConfig = function() {
     var Annotator = window.Annotator;
-     function MySidebar(elem, options) {
-         Annotator.Sidebar.call(this, elem, options);
-     }
-     MySidebar.prototype = Object.create(Annotator.Sidebar.prototype);
+    function MySidebar(elem, options) {
+      var self = this;
+
+      options.showHighlights = true;
+      Annotator.Host.call(this, elem, options);
+      self._areHighlightsShowing = options.showHighlights;
+      self.on('panelReady', function() {
+        var a_highlights = document.createElement('button');
+        a_highlights.innerHTML = 'toggle highlights';
+        a_highlights.onclick = function() {
+          self._areHighlightsShowing = !self._areHighlightsShowing;
+          self.setVisibleHighlights(self._areHighlightsShowing);
+        };
+        document.body.insertBefore(a_highlights,
+            document.body.firstElementChild);
+      });
+    }
+    MySidebar.prototype = Object.create(Annotator.Host.prototype);
 
     return {
-      constructor: MySidebar
+      constructor: MySidebar,
     }
   };
 
