@@ -60,13 +60,14 @@ window.hypothesisInstall = function (inject) {
   }
 
   window.hypothesisConfig = function() {
+    var Annotator = window.Annotator;
      function MySidebar(elem, options) {
-         window.Annotator.Sidebar.call(this, elem, options);
+         Annotator.Sidebar.call(this, elem, options);
      }
      MySidebar.prototype = Object.create(Annotator.Sidebar.prototype);
 
     return {
-      constructor: MySidebar,
+      constructor: MySidebar
     }
   };
 
