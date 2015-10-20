@@ -76,6 +76,7 @@ window.hypothesisInstall = function (inject) {
         };
         document.body.insertBefore(a_highlights,
             document.body.firstElementChild);
+            document.body.style.marginRight = '30em';
       });
     }
     MySidebar.prototype = Object.create(Annotator.Host.prototype);
